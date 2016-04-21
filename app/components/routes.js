@@ -1,5 +1,8 @@
 import angular from 'angular';
 
+import aboutHTML from 'components/about/about.md!md';
+import errorHTML from 'components/error/error.html!text';
+
 // examples
 import indexComponent from 'components/index';
 import barsComponent from 'components/bars/bars';
@@ -17,6 +20,15 @@ export default angular
       .when('/', {
         template: '<index data-package="$resolve.dataPackage"></index>',
         datapackageUrl: 'components/datapackage.json'
+      })
+      .when('/about', {
+        template: aboutHTML
+      })
+      .when('/error', {
+        template: errorHTML
+      })
+      .when('/404', {
+        template: errorHTML
       })
       .when('/bars', {
         template: '<bars data-package="$resolve.dataPackage"></bars>',

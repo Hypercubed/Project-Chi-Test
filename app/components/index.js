@@ -1,6 +1,7 @@
 import {annotate} from 'angular-annotation-decorator/src/index';
 
 import 'common/styles/index.css!';
+import template from './index.html!text';
 
 @annotate('dataService')
 class controller {
@@ -13,7 +14,7 @@ class controller {
 
 export default {
   controller,
-  templateUrl: 'components/index.html',
+  template,
   bindings: {
     dataPackage: '<package'
   }
