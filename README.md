@@ -27,6 +27,10 @@ cd ..
 gulp server --dataset=./dataset/Project-Chi-Test/  # navigate to http://localhost:9000
 ```
 
+### Demo
+
+[![asciicast](https://asciinema.org/a/43075.png)](https://asciinema.org/a/43075)
+
 # Acknowledgments
 
 This work was supported by a research grant from the Japanese Ministry of Education, Culture, Sports, Science and Technology (MEXT) to the RIKEN Center for Life Science Technologies.
