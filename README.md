@@ -15,16 +15,16 @@ Thsi project relies on the [Project χ platform](https://github.com/Hypercubed/P
 ```sh
 git clone https://github.com/Hypercubed/Project-Chi.git
 cd Project-Chi
+git checkout tags/v1.0.0-alpha  # ensure you are using the same version of Project χ
 npm install # jspm install is run post-install by npm
 ```
 
-### Install this dataset
+### Install Project χ Test
 
 ```sh
 cd dataset
-git clone https://github.com/Hypercubed/Project-Chi-Test.git
-cd ..
-gulp server --dataset=./dataset/Project-Chi-Test/  # navigate to http://localhost:9000
+git clone https://github.com/Hypercubed/Project-Chi-Test.git dataset/Project-Chi-Test/
+gulp dev --dataset=./dataset/Project-Chi-Test/  # navigate to http://localhost:9000
 ```
 
 ### Demo
