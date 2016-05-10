@@ -22,9 +22,8 @@ npm install # jspm install is run post-install by npm
 ### Install Project χ Test
 
 ```sh
-cd dataset
-git clone https://github.com/Hypercubed/Project-Chi-Test.git dataset/Project-Chi-Test/
-gulp dev --dataset=./dataset/Project-Chi-Test/  # navigate to http://localhost:9000
+git clone https://github.com/Hypercubed/Project-Chi-Test.git dataset/extra/
+gulp dev --dataset=./dataset/extra/  # navigate to http://localhost:9000
 ```
 
 ### Demo
