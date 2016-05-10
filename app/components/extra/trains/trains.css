@@ -1,33 +1,36 @@
 
-svg {
+#_examples_trains__chart svg {
 	font: 10px sans-serif;
 }
 
-.axis path {
+#_examples_trains__chart .axis path {
 	display: none;
 }
 
-.axis line {
+.#_examples_trains__chart axis line {
 	fill: none;
 	stroke: #000;
 	shape-rendering: crispEdges;
 }
 
-.station line {
+#_examples_trains__chart .station line {
 	stroke: #ddd;
 	stroke-dasharray: 1,1;
 	shape-rendering: crispEdges;
 }
 
-.station text {
+#_examples_trains__chart .station text {
 	text-anchor: end;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333;
 }
 
-.train line {
+#_examples_trains__chart .train line {
 	stroke-width: 1.5px;
 }
 
-.train circle {
+#_examples_trains__chart .train circle {
 	fill: #777;
 	stroke: #fff;
 	stroke-width: 1.5px;

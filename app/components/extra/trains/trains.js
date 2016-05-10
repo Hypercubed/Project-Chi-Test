@@ -1,5 +1,6 @@
 import d3 from 'd3';
 import Chart from './trains-chart';
+import './trains.css!';
 
 function controller () {
   const $ctrl = this;
@@ -17,7 +18,7 @@ function controller () {
   function draw () {
     const data = $ctrl.dataPackage.resources.map(d => d.data);
 
-    const divs = d3.select('#_examples_bars__chart')
+    const divs = d3.select('#_examples_trains__chart')
       .selectAll('div').data(data);
 
     divs.enter().append('div');

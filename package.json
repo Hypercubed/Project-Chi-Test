@@ -4,9 +4,6 @@
   "version": "1.0.0",
   "jspm": {
     "name": "project-chi-extra",
-    "directories": {
-      "lib": "app"
-    },
     "peerDependencies": {
       "d3": "npm:d3@^3.5.16",
       "d3-plugins": "github:d3/d3-plugins@master"
