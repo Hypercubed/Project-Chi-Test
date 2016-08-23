@@ -15,7 +15,7 @@ Thsi project relies on the [Project χ platform](https://github.com/Hypercubed/P
 ```sh
 git clone https://github.com/Hypercubed/Project-Chi.git
 cd Project-Chi
-git checkout tags/v1.0.0-alpha  # ensure you are using the same version of Project χ
+git checkout tags/v1.0.0-rc.5  # ensure you are using the same version of Project χ
 npm install # jspm install is run post-install by npm
 ```
 

@@ -37,6 +37,7 @@ export default function Chart (opts) {
         .tickFormat(formatTime);
 
       var svg = el.append('svg')
+        .attr('title', 'Marey’s Trains')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
         .append('g')
