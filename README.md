@@ -6,7 +6,7 @@ This website was built using the [Project χ platform](https://github.com/Hyperc
 
 ## Installing this test
 
-Thsi project relies on the [Project χ platform](https://github.com/Hypercubed/Project-chi).  If you are not familiar with Project-χ please read the [readme](https://github.com/Hypercubed/Project-Chi/blob/master/README.md).  Note that you should be familiar with [JSPM](http://jspm.io/), [SystemJS](https://github.com/systemjs/systemjs), and [Gulp](http://gulpjs.com/).
+This project relies on the [Project χ platform](https://github.com/Hypercubed/Project-chi).  If you are not familiar with Project-χ please read the [readme](https://github.com/Hypercubed/Project-Chi/blob/master/README.md).  Note that you should be familiar with [JSPM](http://jspm.io/), [SystemJS](https://github.com/systemjs/systemjs), and [Gulp](http://gulpjs.com/).
 
 ## Quick Start
 

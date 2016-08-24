@@ -6,42 +6,42 @@ export default function Chart (opts) {
   opts = opts || {};
 
   return function chart (selection) {
-    selection.each(function (d, i) {
-      var el = d3.select(this);
+    selection.each(function (d) {
+      const el = d3.select(this);
 
       el.selectAll('svg').remove();
 
-      var stations = []; // lazily loaded
+      const stations = []; // lazily loaded
 
-      var formatTime = d3.time.format('%I:%M%p');
+      const formatTime = d3.time.format('%I:%M%p');
 
-      var margin = {top: 20, right: 30, bottom: 20, left: 100};
-      var width = 960 - margin.left - margin.right;
-      var height = 500 - margin.top - margin.bottom;
+      const margin = {top: 20, right: 30, bottom: 20, left: 100};
+      const width = 960 - margin.left - margin.right;
+      const height = 500 - margin.top - margin.bottom;
 
-      var x = d3.time.scale()
+      const x = d3.time.scale()
         .domain([parseTime('5:30AM'), parseTime('11:30AM')])
         .range([0, width]);
 
-      var y = d3.scale.linear()
+      const y = d3.scale.linear()
       .range([0, height]);
 
-      var z = d3.scale.linear()
+      const z = d3.scale.linear()
         .domain([0.0001, 0.0003])
         .range(['purple', 'orange'])
         .interpolate(d3.interpolateLab);
 
-      var xAxis = d3.svg.axis()
+      const xAxis = d3.svg.axis()
         .scale(x)
         .ticks(8)
         .tickFormat(formatTime);
 
-      var svg = el.append('svg')
+      const svg = el.append('svg')
         .attr('title', 'Marey’s Trains')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
         .append('g')
-        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+        .attr('transform', `translate(${margin.left},${margin.top})`);
 
       svg.append('defs').append('clipPath')
         .attr('id', 'clip')
@@ -50,22 +50,22 @@ export default function Chart (opts) {
         .attr('width', width)
         .attr('height', height + margin.top + margin.bottom);
 
-      var trains = d.map(type);
+      const trains = d.map(type);
 
-      y.domain(d3.extent(stations, function (d) { return d.distance; }));
+      y.domain(d3.extent(stations, d => d.distance));
 
-      var station = svg.append('g')
+      const station = svg.append('g')
         .attr('class', 'station')
         .selectAll('g')
         .data(stations)
         .enter().append('g')
-        .attr('transform', function (d) { return 'translate(0,' + y(d.distance) + ')'; });
+        .attr('transform', d => `translate(0,${y(d.distance)})`);
 
       station.append('text')
         .attr('x', -6)
         .attr('dy', '.35em')
         .attr('text-anchor', 'end')
-        .text(function (d) { return d.name; });
+        .text(d => d.name);
 
       station.append('line')
         .attr('x2', width);
@@ -76,47 +76,47 @@ export default function Chart (opts) {
 
       svg.append('g')
         .attr('class', 'x bottom axis')
-        .attr('transform', 'translate(0,' + height + ')')
+        .attr('transform', `translate(0,${height})`)
         .call(xAxis.orient('bottom'));
 
-      var train = svg.append('g')
+      const train = svg.append('g')
         .attr('class', 'train')
         .attr('clip-path', 'url(#clip)')
         .selectAll('g')
-        .data(trains.filter(function (d) { return /[NLB]/.test(d.type); }))
+        .data(trains.filter(d => /[NLB]/.test(d.type)))
         .enter().append('g')
-        .attr('class', function (d) { return d.type; });
+        .attr('class', d => d.type);
 
       train.selectAll('line')
-        .data(function (d) {
-          return d.stops.slice(1).map(function (b, i) {
+        .data(d => {
+          return d.stops.slice(1).map((b, i) => {
             return [d.stops[i], b];
           });
         })
         .enter().append('line')
-        .attr('x1', function (d) { return x(d[0].time); })
-        .attr('x2', function (d) { return x(d[1].time); })
-        .attr('y1', function (d) { return y(d[0].station.distance); })
-        .attr('y2', function (d) { return y(d[1].station.distance); })
-        .style('stroke', function (d) { return z(Math.abs((d[1].station.distance - d[0].station.distance) / (d[1].time - d[0].time))); });
+        .attr('x1', d => x(d[0].time))
+        .attr('x2', d => x(d[1].time))
+        .attr('y1', d => y(d[0].station.distance))
+        .attr('y2', d => y(d[1].station.distance))
+        .style('stroke', d => z(Math.abs((d[1].station.distance - d[0].station.distance) / (d[1].time - d[0].time))));
 
       train.selectAll('circle')
-      .data(function (d) { return d.stops; })
-      .enter().append('circle')
-      .attr('transform', function (d) { return 'translate(' + x(d.time) + ',' + y(d.station.distance) + ')'; })
-      .attr('r', 2);
+        .data(d => d.stops)
+        .enter().append('circle')
+        .attr('transform', d => `translate(${x(d.time)},${y(d.station.distance)})`)
+        .attr('r', 2);
 
       function type (d, i) {
         // Extract the stations from the 'stop|*' columns.
         if (!i) {
-          for (var k in d) {
+          for (const k in d) {
             if (/^stop\|/.test(k)) {
-              var p = k.split('|');
+              const p = k.split('|');
               stations.push({
                 key: k,
                 name: p[1],
-                distance: +p[2],
-                zone: +p[3]
+                distance: Number(p[2]),
+                zone: Number(p[3])
               });
             }
           }
@@ -127,14 +127,20 @@ export default function Chart (opts) {
           type: d.type,
           direction: d.direction,
           stops: stations
-          .map(function (s) { return {station: s, time: parseTime(d[s.key])}; })
-          .filter(function (s) { return s.time != null; })
+            .map(s => {
+              return {station: s, time: parseTime(d[s.key])};
+            })
+            .filter(s => {
+              return s.time != null;
+            })
         };
       }
 
       function parseTime (s) {
-        var t = formatTime.parse(s);
-        if (t != null && t.getHours() < 3) t.setDate(t.getDate() + 1);
+        const t = formatTime.parse(s);
+        if (t != null && t.getHours() < 3) {
+          t.setDate(t.getDate() + 1);
+        }
         return t;
       }
     });

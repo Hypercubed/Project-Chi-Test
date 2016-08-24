@@ -1,5 +1,5 @@
 import 'common/styles/index.css!';
-import template from './index.html!text';
+import template from './extra-index.html!text';
 
 controller.$inject = ['dataService'];
 function controller (dataService) {

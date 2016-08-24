@@ -3,7 +3,7 @@ import angular from 'angular';
 import aboutHTML from 'components/about/about.md!md';
 import errorHTML from 'components/error/error.html!text';
 
-import examples from './extra/routes';
+import examples from './extra/extra-routes';
 import indexComponent from './index/index';
 
 configRoutes.$inject = ['$routeProvider'];

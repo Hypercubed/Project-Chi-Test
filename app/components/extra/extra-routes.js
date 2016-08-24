@@ -1,16 +1,17 @@
 import angular from 'angular';
 
-import aboutHTML from 'components/about/about.md!md';
-import errorHTML from 'components/error/error.html!text';
-
-// examples
-import indexComponent from './index';
+// "extra" components
 import trainsComponent from './trains/trains';
 import hexbinComponent from './hexbin/hexbin';
+import extraIndexComponent from './extra-index';
 
 routeConfig.$inject = ['$routeProvider'];
 function routeConfig ($routeProvider) {
   $routeProvider
+    .when('/extra', {
+      template: '<extra data-package="$resolve.dataPackage"></extra>',
+      datapackageUrl: 'components/extra/datapackage.json'
+    })
     .when('/extra/trains', {
       template: '<trains data-package="$resolve.dataPackage"></trains>',
       datapackageUrl: 'components/extra/trains/datapackage.json'
@@ -23,7 +24,7 @@ function routeConfig ($routeProvider) {
 
 export default angular
   .module('extra', ['projectX.dataService'])
+  .component('extra', extraIndexComponent)
   .component('trains', trainsComponent)
-  .component('extra', indexComponent)
   .component('hexbin', hexbinComponent)
   .config(routeConfig);
