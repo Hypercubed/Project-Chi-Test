@@ -4,7 +4,9 @@
 import d3 from 'd3';
 import 'd3-plugins/hexbin/hexbin';
 
-function controller () {
+function controller ($scope) {
+  $scope.options = {};
+
   const width = 960;
   const height = 500;
   let i = -1;
@@ -66,6 +68,6 @@ function controller () {
 }
 
 export default {
-  controller,
+  controller: ['$scope', controller],
   templateUrl: 'components/extra/hexbin/hexbin.html'
 };
